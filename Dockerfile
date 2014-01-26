@@ -1,13 +1,3 @@
-## Usage
-#
-# docker build -t holizz/cherrymusic .
-# docker run -name cherrymusic-data busybox /bin/true
-# docker run -d -v /path/to/music:/music -volumes-from cherrymusic-data -p 3000:3000 -name cherrymusic holizz/cherrymusic
-#
-# To stop/start:
-# docker stop cherrymusic
-# docker start cherrymusic
-
 FROM debian
 ENV DEBIAN_FRONTEND noninteractive
 RUN apt-get update
