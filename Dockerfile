@@ -1,16 +1,10 @@
-FROM debian
-ENV DEBIAN_FRONTEND noninteractive
-RUN apt-get update
+FROM python:3
 
-RUN apt-get install -y git python3-pip
-RUN /usr/bin/pip-3.2 install CherryPy
+RUN pip install CherryPy
+RUN pip install CherryMusic
 
-RUN git clone https://github.com/devsnd/cherrymusic.git /cherrymusic
+ADD cherrymusic.conf /root/.config/cherrymusic/cherrymusic.conf
 
-ADD cherrymusic.conf /.config/cherrymusic/cherrymusic.conf
-ADD run.sh /run.sh
-
-VOLUME ["/music", "/.local"]
-USER root
+VOLUME ["/music", "/root/.local"]
 EXPOSE 3000
-CMD /run.sh
+CMD rm -f /root/.local/share/cherrymusic/cherrymusic.pid && exec cherrymusic --port 3000
